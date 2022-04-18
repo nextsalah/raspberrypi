@@ -1,33 +1,46 @@
-
-from flask import Flask, send_from_directory
-from flask.helpers import url_for
-from flask_socketio import SocketIO, emit
+from bs4 import Tag
+from flask import Flask
+from flask_socketio import SocketIO
+import werkzeug
+import flask.scaffold
+werkzeug.cached_property = werkzeug.utils.cached_property
+flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
+from flask_restplus import Api
 from src.config import Config 
 from flask_sqlalchemy import SQLAlchemy
-import os
+from src.routes.main import main
+from src.routes.api.routes_api import HelloWorld
 
+# Initialize the app
+app = Flask(__name__)
 
 # Initialize socketio
 socketio = SocketIO()
 
+# Initialize API
+api = Api(app, prefix=Config.API_PREFIX,
+          title='API',
+          description='Handels API requests',
+          license='MIT License',
+          contact='Ismail Sacic',
+          contact_url='https://github.com/nextsalah',
+          version='1.0',
+          doc=f"{Config.API_PREFIX}/docs/"
+        )
+
 #initialize database
 db = SQLAlchemy()
 
-def create_app(config_class=Config):
-
-    #Create and configure the app    
-    app = Flask(__name__, static_folder="./build_react")
+def create_app(config_class=Config):    
+    #App configuration
     app.config.from_object(Config)
+    
+    #Initialize database
     db.init_app(app)
-    
+
     # Configure main routes
-    from src.routes.main import main
-    app.register_blueprint(main, url_prefix='/')
-    
-    # Configure routes (/api)
-    from src.routes.api.routes_api import api
-    app.register_blueprint(api, url_prefix='/api/v1')
-    
+    app.register_blueprint( main , url_prefix='/')
+
     # Configure socketio
     socketio.init_app(app)
 

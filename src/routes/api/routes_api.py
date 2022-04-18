@@ -1,9 +1,5 @@
 from flask import Blueprint
-from src.config import Config
+from flask_restplus import Api
 
-UPLOAD_FILE_SRC = Config.UPLOAD_FOLDER
-api = Blueprint('api', __name__)
-
-@api.route( '/' )
-def index():
-    return {'message': 'Hello, World!'}
+blueprint = Blueprint('api', __name__)
+api = Api(blueprint)
