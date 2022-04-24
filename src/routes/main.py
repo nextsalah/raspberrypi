@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from src import app, db
 from src.models import Setting, Media
 main_routes = Blueprint( 'main' ,  __name__ )
@@ -17,4 +17,4 @@ def before_first_request():
 
 @main_routes.route( '/' )
 def index():
-    return "Hello, World! Main Blueprint"
+    return render_template( 'index.html' )

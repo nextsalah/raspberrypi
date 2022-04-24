@@ -5,6 +5,7 @@ from flask_restful import Api
 from src.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_scss import Scss
 
 # Initialize the full app
 app = Flask( __name__)
@@ -12,7 +13,8 @@ socketio = SocketIO()
 api = Api(prefix=Config.API_PREFIX )
 db = SQLAlchemy( )
 migrate = Migrate(app, db)
-    
+Scss(app, static_dir='static',  asset_dir='assets')
+   
 
 def create_app():    
     """Create an application."""
