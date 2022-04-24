@@ -107,15 +107,16 @@ class Video( db.Model ):
 class Media( db.Model ):
     __tablename__ = 'Media'
     id = db.Column(db.Integer, primary_key=True, default=1)
-    media_type = db.Column(db.Integer, nullable=False)
-    delay = db.Column(db.Integer, nullable=False)
-    google_slide = db.Column(db.String, nullable=True)
+    media_type = db.Column(db.Integer, nullable=False, default=0)
+    delay = db.Column(db.Integer, nullable=False, default=10)
+    google_slide = db.Column(db.String, nullable=True, default=None)
     
     def json(self):
         return {
             'id': self.id,
-            'media_src': self.media_src,
-            'media_type': self.media_type
+            'delay': self.delay,
+            'media_type': self.media_type,
+            'google_slide': self.google_slide
         }
         
     def __repr__(self):

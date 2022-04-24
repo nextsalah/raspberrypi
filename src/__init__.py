@@ -6,7 +6,6 @@ from src.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-
 # Initialize the full app
 app = Flask( __name__)
 socketio = SocketIO()
@@ -27,7 +26,7 @@ def create_app():
     
     # Import the models
     import src.models
-    
+
     # Register main routes
     from .routes.main import main_routes
     app.register_blueprint( main_routes, url_prefix='/')
