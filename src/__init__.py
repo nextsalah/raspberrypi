@@ -1,47 +1,40 @@
-from bs4 import Tag
+import imp
 from flask import Flask
 from flask_socketio import SocketIO
-import werkzeug
-import flask.scaffold
-werkzeug.cached_property = werkzeug.utils.cached_property
-flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
-from flask_restplus import Api
-from src.config import Config 
+from flask_restful import Api
+from src.config import Config
 from flask_sqlalchemy import SQLAlchemy
-from src.routes.main import main
-from src.routes.api.routes_api import HelloWorld
+from flask_migrate import Migrate
 
-# Initialize the app
-app = Flask(__name__)
 
-# Initialize socketio
+# Initialize the full app
+app = Flask( __name__)
 socketio = SocketIO()
+api = Api(prefix=Config.API_PREFIX )
+db = SQLAlchemy( )
+migrate = Migrate(app, db)
+    
 
-# Initialize API
-api = Api(app, prefix=Config.API_PREFIX,
-          title='API',
-          description='Handels API requests',
-          license='MIT License',
-          contact='Ismail Sacic',
-          contact_url='https://github.com/nextsalah',
-          version='1.0',
-          doc=f"{Config.API_PREFIX}/docs/"
-        )
-
-#initialize database
-db = SQLAlchemy()
-
-def create_app(config_class=Config):    
-    #App configuration
+def create_app():    
+    """Create an application."""
+    
+    #App configurations
     app.config.from_object(Config)
     
-    #Initialize database
+    # Initialize the database
     db.init_app(app)
+    db.create_all(app=app)
+    
+    # Import the models
+    import src.models
+    
+    # Register main routes
+    from .routes.main import main_routes
+    app.register_blueprint( main_routes, url_prefix='/')
 
-    # Configure main routes
-    app.register_blueprint( main , url_prefix='/')
-
-    # Configure socketio
+    # Register the API & SocketIO routes
     socketio.init_app(app)
+    api.init_app(app)
 
     return app
+

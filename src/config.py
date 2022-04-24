@@ -1,5 +1,6 @@
 class Config:
-    SECRET_KEY = 'Secret key'
     UPLOAD_FOLDER = './static/upload'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///src/db/database.db'
-    API_PREFIX = '/api/v1'
+    API_PREFIX = '/api'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///db/database.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
