@@ -27,34 +27,42 @@ body > header {
     a {
         color: $secound_dark_mode;
         text-decoration: none;
-        font-size: 1.2rem;
+        font-size: 0.9rem;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        
+        font-weight: bold;
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 0.5rem;
         padding: 0.9rem 0.7rem;
-        border-bottom: $secondary_color solid 3px;
+        border-bottom: $secondary_color solid 0.4rem;
 
-        img {width: 4rem; height: 4rem; border-radius: 50%;}
+        img {width: 3.8rem; height: 3.8rem; border-radius: 50%;}
     }
 }
 
 // Buttons
 .buttons{
-    // Two buttons on a row
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-
-    & > a{
-        background-color: $secondary_color;
-        color: $light_mode;
-        padding: 0.5rem 1rem;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;
+}
+.buttons > a, .preview{
+    display: flex; flex-direction: row;
+    align-items: center; gap: 0.7rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    background-color: $secondary_color;
+    color: $light_mode;
+    padding: 0.5rem 1rem;
+    &:hover{
+        opacity: 0.8;
+        transition: 0.3s;
     }
 }
 
+.preview{
+    margin: 1rem 0;
+    background-color: $primary_color;
+}
 
 // Mobile SCSS
 @media screen and (max-width: 600px) {

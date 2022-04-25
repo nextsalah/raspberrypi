@@ -8,13 +8,25 @@
 
 <div class="container">
     <div class="buttons">
-        <a href="/settings">Settings</a>
-        <a href="/language">Language</a>
-        <a href="/media">Media</a>
-        <a href="/advanced">Advanced</a>
+        <a href="/settings">
+            <img src="{{url_for('static', filename='images/SVG/settings.svg')}}" alt="Settings" width="50" height="50">
+            Settings
+        </a>
+        <a href="/language">
+            <img src="{{url_for('static', filename='images/SVG/language.svg')}}" alt="Settings" width="50" height="50">
+            Language
+        </a>
+        <a href="/media">
+            <img src="{{url_for('static', filename='images/SVG/media.svg')}}" alt="Settings" width="50" height="50">
+            Media
+        </a>
+        <a href="/advanced">
+            <img src="{{url_for('static', filename='images/SVG/eclipse.svg')}}" alt="Settings" width="50" height="50">
+            Advanced
+        </a>
     </div>
 
-    <a class="preview" href="/preview">Preview</a>
+    <a class="preview" href="/screen">Preview</a>
 </div>
 
 {% endblock %}
