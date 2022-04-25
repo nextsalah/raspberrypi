@@ -1,4 +1,3 @@
-import imp
 from flask import Flask
 from flask_socketio import SocketIO
 from flask_restful import Api
@@ -21,12 +20,12 @@ def create_app():
     #App configurations
     app.config.from_object(Config)
     
+    # Import the models
+    import src.models
+    
     # Initialize the database
     db.init_app(app)
     db.create_all(app=app)
-    
-    # Import the models
-    import src.models
     
     # Initialize SCSS for the assets
     scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css')

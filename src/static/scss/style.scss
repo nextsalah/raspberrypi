@@ -1,3 +1,64 @@
-p{
-    color: red;
+$dark_mode: #232227;
+$secound_dark_mode: #2e3138;
+$light_mode: #f5f5f5;
+$primary_color: #388fdb;
+$secondary_color: #05c46b;
+$gradient_color: linear-gradient(-45deg,#e93a51, #d434da, #5a18d4, #1899cc, #23d567, #7bff00);
+$text-shadow: 1px 2px 5px $dark_mode;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body { background: $light_mode; color: $dark_mode; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+.container{
+    max-width: 2200px;
+    margin: 0 auto;
+    padding: 0.5rem 0.7rem;
+}
+
+a{ color: $dark_mode;text-decoration: none;}
+
+// Headers
+body > header {
+    background-color: $light_mode;
+    position: relative;
+    a {
+        color: $secound_dark_mode;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.9rem 0.7rem;
+        border-bottom: $secondary_color solid 3px;
+
+        img {width: 4rem; height: 4rem; border-radius: 50%;}
+    }
+}
+
+// Buttons
+.buttons{
+    // Two buttons on a row
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+
+    & > a{
+        background-color: $secondary_color;
+        color: $light_mode;
+        padding: 0.5rem 1rem;
+    }
+}
+
+
+// Mobile SCSS
+@media screen and (max-width: 600px) {
+    .buttons {
+        grid-template-columns: 1fr;
+    }
 }
