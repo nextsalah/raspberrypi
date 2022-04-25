@@ -1,3 +1,9 @@
+src/static/.webassets-cache
+./src/static/.webassets-cache
+.webassets-cache
+
+
+#  Database
 src/db/database.db
 ./src/db/database.db
 database.db

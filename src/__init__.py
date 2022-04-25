@@ -5,7 +5,7 @@ from flask_restful import Api
 from src.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_scss import Scss
+from flask_assets import Environment, Bundle
 
 # Initialize the full app
 app = Flask( __name__)
@@ -13,8 +13,7 @@ socketio = SocketIO()
 api = Api(prefix=Config.API_PREFIX )
 db = SQLAlchemy( )
 migrate = Migrate(app, db)
-Scss(app, static_dir='static',  asset_dir='assets')
-   
+assets = Environment(app)
 
 def create_app():    
     """Create an application."""
@@ -28,6 +27,10 @@ def create_app():
     
     # Import the models
     import src.models
+    
+    # Initialize SCSS for the assets
+    scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css')
+    assets.register('scss_all', scss)
 
     # Register main routes
     from .routes.main import main_routes
