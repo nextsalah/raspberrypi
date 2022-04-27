@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %} - NextSalah</title>
-    {% block head %}{% endblock %}
-    
-    {% assets "scss_all" %}
-        <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
-    {% endassets %}
-</head>
+    {% block head %}{% endblock %} {% assets "scss_all" %} <link rel=stylesheet
+    type=text/css href="{{ ASSET_URL }}"> {% endassets %}
+  </head>
 
-<body>
+  <body>
     <header>
-        <a class="logo" href="/">
-            <img src="{{ url_for('static', filename='images/NextSalah.png') }}" alt="NextSalah">
-            <h1>NextSalah</h1>
-        </a>
+      <a class="logo" href="/">
+        <img
+          src="{{ url_for('static', filename='images/NextSalah.png') }}"
+          alt="NextSalah"
+        />
+        <h1>NextSalah</h1>
+      </a>
     </header>
 
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+    <main>
+      <div class="container">{% block content %}{% endblock %}</div>
+    </main>
 
-</body>
+    <div class="actions">
+      {% if not home%}
+      <a class="link_go_back button" onclick="history.back(-1)">
+        <img
+          src="{{url_for('static', filename='images/SVG/back.svg')}}"
+          alt="Settings"
+          width="20"
+          height="30"
+        />
+        Go Back
+      </a>
+      <div class="spacer"></div>
+      {% endif %}
+
+      {% block save_button %}{% endblock %}
+
+    </div>
+  </body>
 </html>

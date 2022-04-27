@@ -6,27 +6,25 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="buttons">
-        <a href="/settings">
-            <img src="{{url_for('static', filename='images/SVG/settings.svg')}}" alt="Settings" width="50" height="50">
-            Settings
-        </a>
-        <a href="/language">
-            <img src="{{url_for('static', filename='images/SVG/language.svg')}}" alt="Settings" width="50" height="50">
-            Language
-        </a>
-        <a href="/media">
-            <img src="{{url_for('static', filename='images/SVG/media.svg')}}" alt="Settings" width="50" height="50">
-            Media
-        </a>
-        <a href="/advanced">
-            <img src="{{url_for('static', filename='images/SVG/eclipse.svg')}}" alt="Settings" width="50" height="50">
-            Advanced
-        </a>
-    </div>
-
-    <a class="preview" href="/screen">Preview</a>
+<div class="buttons">
+    <a href="/prayertimes">
+        <img src="{{url_for('static', filename='images/SVG/clock.svg')}}" alt="Clock icon" width="50" height="50">
+        Prayer Times
+    </a>
+    <a href="/language">
+        <img src="{{url_for('static', filename='images/SVG/language.svg')}}" alt="Settings icon" width="50" height="50">
+        Language
+    </a>
+    <a href="/media">
+        <img src="{{url_for('static', filename='images/SVG/media.svg')}}" alt="Settings icon" width="50" height="50">
+        Media
+    </a>
+    <a href="/advanced">
+        <img src="{{url_for('static', filename='images/SVG/eclipse.svg')}}" alt="Settings icon" width="50" height="50">
+        Advanced
+    </a>
 </div>
+
+<a class="preview" href="/screen">Preview</a>
 
 {% endblock %}

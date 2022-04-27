@@ -28,7 +28,7 @@ def create_app():
     db.create_all(app=app)
     
     # Initialize SCSS for the assets
-    scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css')
+    scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css', depends=('scss/*.scss'))
     assets.register('scss_all', scss)
 
     # Register main routes

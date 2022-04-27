@@ -3,70 +3,133 @@ $secound_dark_mode: #2e3138;
 $light_mode: #f5f5f5;
 $primary_color: #388fdb;
 $secondary_color: #05c46b;
-$gradient_color: linear-gradient(-45deg,#e93a51, #d434da, #5a18d4, #1899cc, #23d567, #7bff00);
+$gradient_color: linear-gradient(
+  -45deg,
+  #e93a51,
+  #d434da,
+  #5a18d4,
+  #1899cc,
+  #23d567,
+  #7bff00
+);
 $text-shadow: 1px 2px 5px $dark_mode;
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
-body { background: $light_mode; color: $dark_mode; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
-.container{
-    max-width: 2200px;
-    margin: 0 auto;
-    padding: 0.5rem 0.7rem;
+body {
+  background: $light_mode;
+  color: $dark_mode;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 93vh;
 }
-
-a{ color: $dark_mode;text-decoration: none;}
+.container {
+  max-width: 2200px;
+  margin: 0 auto;
+  padding: 0.8rem 1rem;
+}
+a {
+  color: $dark_mode;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+}
 
 // Headers
 body > header {
-    background-color: $light_mode;
-    position: relative;
-    a {
-        color: $secound_dark_mode;
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: bold;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.9rem 0.7rem;
-        border-bottom: $secondary_color solid 0.4rem;
-
-        img {width: 3.8rem; height: 3.8rem; border-radius: 50%;}
-    }
-}
-
-// Buttons
-.buttons{
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;
-}
-.buttons > a, .preview{
-    display: flex; flex-direction: row;
-    align-items: center; gap: 0.7rem;
-    font-size: 1.4rem;
+  background-color: $light_mode;
+  position: relative;
+  a {
+    color: $secound_dark_mode;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
-    background-color: $secondary_color;
-    color: $light_mode;
-    padding: 0.5rem 1rem;
-    &:hover{
-        opacity: 0.8;
-        transition: 0.3s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 0.7rem;
+    border-bottom: $secondary_color solid 0.4rem;
+
+    img {
+      width: 3.8rem;
+      height: 3.8rem;
+      border-radius: 50%;
     }
+  }
 }
 
-.preview{
-    margin: 1rem 0;
-    background-color: $primary_color;
+// General Buttons
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  flex-direction: column;
+}
+.buttons > a,
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 6px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  background-color: $secondary_color;
+  color: $light_mode;
+  padding: 1.5rem 1rem;
+}
+
+.preview {
+  margin: 1rem 0;
+  padding: 1.5rem 1rem;
+  background-color: $primary_color;
+}
+
+// Button (Go back)
+
+button, .button {
+  display: inline-flex;
+  gap: 0.9rem;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-radius: 6px;
+  padding: 0.8rem 1.2rem;
+  color: $light_mode;
+  height: 3rem;
+  border: none;
+  background-color: $primary_color;
+  &.link_go_back {
+    background-color: red;
+  }
+  &.submit{
+    background-color: rgb(50, 201, 50);
+  }
+}
+
+.actions {
+    display: flex;
+    flex: 1;
+    padding: 1rem;
+    align-items: flex-end;
+
+    > .spacer {
+      flex: 1;
+    }
 }
 
 // Mobile SCSS
 @media screen and (max-width: 600px) {
-    .buttons {
-        grid-template-columns: 1fr;
-    }
+  .buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
