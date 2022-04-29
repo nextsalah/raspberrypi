@@ -3,6 +3,7 @@ $secound_dark_mode: #2e3138;
 $light_mode: #f5f5f5;
 $primary_color: #388fdb;
 $secondary_color: #05c46b;
+$max_width: 2200px;
 $gradient_color: linear-gradient(
   -45deg,
   #e93a51,
@@ -26,11 +27,12 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 93vh;
+
 }
 .container {
-  max-width: 2200px;
+  max-width: $max_width;
   margin: 0 auto;
-  padding: 0.8rem 1rem;
+  padding: 1.4rem 1rem;
 }
 a {
   color: $dark_mode;
@@ -116,16 +118,78 @@ button, .button {
   }
 }
 
+// Actions (buttons thing)
 .actions {
     display: flex;
     flex: 1;
-    padding: 1rem;
     align-items: flex-end;
+    padding: 0.8rem 1.2rem;
 
     > .spacer {
       flex: 1;
     }
 }
+
+.prayertimes{
+  background-color: $secondary_color;
+  padding: 2rem 2.6rem;
+  border-radius: 6px;
+  color: $light_mode;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  h3{
+    font-size: calc(1rem + 1vw);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  &_input{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 0.5rem;
+    background-color: #fff;
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
+    input{
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      outline: none;
+      font-size: larger;
+    }
+  }
+  a{
+    background-color: $dark_mode;
+    border-radius: 6px;
+    padding: 0.3rem 1.2rem;
+    font-size: 1rem;
+    color: #ffffff;
+  }
+  
+}
+
+.choose_prayertime{
+  display: flex;
+  flex-direction: column;
+  color: $light_mode;
+  background-color: $secondary_color;
+  border-radius: 6px;
+  padding: 0.8rem 1.2rem;
+  
+  select{
+    padding: 0.8rem 1.2rem;
+    border: none;
+    color: #546c84;
+    background-color: #fbfbfb;
+    font-size: larger;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+  }
+}
+
 
 // Mobile SCSS
 @media screen and (max-width: 600px) {

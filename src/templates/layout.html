@@ -26,20 +26,19 @@
 
     <div class="actions">
       {% if not home%}
-      <a class="link_go_back button" onclick="history.back(-1)">
-        <img
-          src="{{url_for('static', filename='images/SVG/back.svg')}}"
-          alt="Settings"
-          width="20"
-          height="30"
-        />
-        Go Back
-      </a>
+        <a class="link_go_back button" onclick="history.back(-1)">
+          <img
+            src="{{url_for('static', filename='images/SVG/back.svg')}}"
+            alt="Settings"
+            width="20"
+            height="30"
+          />
+          Go Back
+        </a>
       <div class="spacer"></div>
       {% endif %}
-
       {% block save_button %}{% endblock %}
-
     </div>
+
   </body>
 </html>

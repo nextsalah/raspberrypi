@@ -6,6 +6,31 @@
 
 {% block content %}
 
-<p>Prayertimes</p>
+
+<!-- Islamiskaforbundet.se -->
+<div class="choose_prayertime">
+    <h3>Islamiska Förbundet</h3>
+    <select id="islamic_prayertime_select">
+        <option value="" selected disabled>Välj stad</option>
+        <option value="" >Välj stad</option>
+
+        {% for city in cities %}
+            <option value="{{ city.id }}">{{ city.name }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<!-- 
+<div class="prayertimes">
+ 
+    <h3>Get prayertimes automaticly</h3>
+    <div class="prayertimes_input">
+        <img src="{{ url_for('static', filename='images/ICONS/map-marker.png') }}" alt="prayertimes"  width="48" height="48" >
+        <input type="text" id="location" placeholder="Type your location..."/>
+    </div>
+
+    <a href="/prayertimes/custom">Get custom prayertimes</a>
+
+</div> -->
 
 {% endblock %}

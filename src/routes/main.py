@@ -30,7 +30,6 @@ def page_not_found(e):
 def index():
     return render_template( 'index.html' , home = True)
 
-
  # -------- Dashboard --------
 @main_routes.route( '/media' )
 def media():
