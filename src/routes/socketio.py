@@ -1,5 +1,6 @@
-from flask_socketio import emit, join_room, leave_room
 from .. import socketio
+from ..utils.nextsalah_api import NextSalahAPI
+
 
 @socketio.on('connect', namespace='/dd')
 def ws_conn():
@@ -9,7 +10,10 @@ def ws_conn():
 def ws_disconn():
     print('Disconnected')
     
-@socketio.on('test')
-def test(json):
-    return json
-
+@socketio.on('get_new_prayertimes')
+def get_new_prayertimes(json):
+    source, data = json['source'], json['data']
+    print('Getting new prayertimes ', source, data)
+    new_prayertimes = NextSalahAPI.get_prayertimes(source, data)
+    print(new_prayertimes)
+    print('New prayertimes: ', "Done")

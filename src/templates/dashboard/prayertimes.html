@@ -1,24 +1,102 @@
 {% extends 'layout.html' %}
 
+{% block head %}
+    <script src="{{ url_for('static', filename='scripts/lib/socket.io.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='scripts/prayertimes/main.js') }}" type="text/javascript"></script>
+{% endblock %}
 
 {% block title %}Prayer Times{% endblock %}
-
 
 {% block content %}
 
 
 <!-- Islamiskaforbundet.se -->
-<div class="choose_prayertime">
-    <h3>Islamiska Förbundet</h3>
-    <select id="islamic_prayertime_select">
-        <option value="" selected disabled>Välj stad</option>
-        <option value="" >Välj stad</option>
 
-        {% for city in cities %}
-            <option value="{{ city.id }}">{{ city.name }}</option>
-        {% endfor %}
-    </select>
+<div class="custom_prayertime">
+
+    
+    <div class="custom_prayertime_options">
+       <h3>Islamiska Förbundet</h3>
+        
+        {% if options['islamiska-forbundet'] %}
+            <p>Select a city</p>
+            <select id="islamiska_forbundet_city">
+                <option value="" selected disabled>--- Choose City ----</option>
+                {% for city in options['islamiska-forbundet'] %}
+                    <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+            <div>
+                <button class="submit button" onclick="get_prayertimes('islamiska-forbundet')">
+                    <img
+                            src="{{ url_for('static', filename='images/SVG/save.svg') }}"
+                            alt="Save ICON"
+                            width="20"
+                            height="20"
+                        />
+                    <span>Save</span>
+                </button>
+            </div>
+        {% else %}
+            <p>Error getting prayertimes from Islamiska Förbundet</p>
+        {% endif %}
+    </div>
+
+
+    <div class="custom_prayertime_options">
+        <h3>Vaktija.ba (BA)</h3>
+        {% if options['vaktijaba'] %}
+            <p>Select a city</p>
+            <select id="vaktijaba_city">
+                    <option value="" selected disabled>--- Choose City ----</option>
+                    {% for city in options['vaktijaba'] %}
+                        <option value="{{ options['vaktijaba'].index(city) }}">{{ city }}</option>
+                    {% endfor %}
+            </select>
+            <div>
+                <button class="submit button" onclick="get_prayertimes('vaktijaba')">
+                    <img
+                            src="{{ url_for('static', filename='images/SVG/save.svg') }}"
+                            alt="Save ICON"
+                            width="20"
+                            height="20"
+                        />
+                    <span>Save</span>
+                </button>
+            </div>
+        {% else %}
+            <p>Error getting prayertimes from Vaktija.ba</p>
+        {% endif %}
+    </div>
+
+    <div class="custom_prayertime_options">
+        <h3>Vaktija.eu (EU)</h3>
+        {% if options['vaktijaeu'] %}
+            <p>Select a country</p>
+                <select id="vaktija_eu_country" class="select" name="country" id="country">
+                    <option value="" disabled selected="selected">Select a country</option>
+                </select>
+            <p id="vaktija_eu_name" style="display: none;">Select a city</p>
+                <select id="vaktija_eu_city" style="display: none;" name="city"></select>
+            <div>
+                <button style="display: none;" class="submit button" id="vaktija_eu_button" onclick="get_prayertimes('vaktijaeu')">
+                    <img
+                            src="{{ url_for('static', filename='images/SVG/save.svg') }}"
+                            alt="Save ICON"
+                            width="20"
+                            height="20"
+                        />
+                    <span>Save</span>
+                </button>
+            </div>
+
+        {% else %}
+            <p>Error getting prayertimes from Vakitja.eu</p>
+        {% endif %}
+    </div>
+
 </div>
+<script data-vaktijaeu="{{ options['vaktijaeu'] }}" src="{{ url_for('static', filename='scripts/prayertimes/vaktijaeu.js') }}"></script>
 
 <!-- 
 <div class="prayertimes">

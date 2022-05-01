@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, send_from_directory
 from src import app, db
 from src.models import Setting, Media
+from ..utils.nextsalah_api import NextSalahAPI
 import os
 
 main_routes = Blueprint( 'main' ,  __name__ )
@@ -41,7 +42,8 @@ def language():
 
 @main_routes.route( '/prayertimes' )
 def prayertimes():
-    return render_template('dashboard/prayertimes.html')
+    options = NextSalahAPI.get_options()
+    return render_template('dashboard/prayertimes.html', options = options)
 
 @main_routes.route( '/advanced' )
 def advanced():
@@ -52,3 +54,8 @@ def advanced():
 def settings():
     settings = Setting.query.filter_by( id = 1 ).one_or_none()
     return render_template( 'advanced/settings.html' , settings = settings)
+
+
+@main_routes.route( '/screen' , methods = [ 'GET' ] )
+def screen():
+    return "Screen"
