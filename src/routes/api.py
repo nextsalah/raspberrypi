@@ -1,14 +1,14 @@
 from flask_restful import Resource
 from .. import api
-from ..models import Setting
+from ..models import Settings
 from .. import db
 
 class Todo(Resource):
     def get(self, todo_id):
-        setting = Setting.query.filter_by(id=todo_id).one_or_none()
-        print(Setting.query.all())
-        if Setting.query.all() == []:
-            db.session.add(Setting())
+        setting = Settings.query.filter_by(id=todo_id).one_or_none()
+        print(Settings.query.all())
+        if Settings.query.all() == []:
+            db.session.add(Settings())
             db.session.commit()
         
         return setting.json()

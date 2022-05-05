@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, send_from_directory
 from src import app, db
-from src.models import Setting, Media
+from src.models import Settings, Medias
 from ..utils.nextsalah_api import NextSalahAPI
 import os
 
@@ -13,13 +13,13 @@ def favicon():
 
 @app.before_first_request
 def before_first_request():
-    if Setting.query.one_or_none() is None:
-        db.session.add( Setting(id = 1 ))
+    if Settings.query.one_or_none() is None:
+        db.session.add( Settings(id = 1 ))
         print(' Inserted a new Setting object into the database with id = 1.')
         
-    if Media.query.one_or_none() is None:
+    if Medias.query.one_or_none() is None:
         print(' Inserted a new Media object into the database with id = 1.')
-        db.session.add( Media( id = 1))
+        db.session.add( Medias( id = 1))
         
     db.session.commit()
 
@@ -52,7 +52,7 @@ def advanced():
 # -------- Advanced --------
 @main_routes.route( '/settings' )
 def settings():
-    settings = Setting.query.filter_by( id = 1 ).one_or_none()
+    settings = Settings.query.filter_by( id = 1 ).one_or_none()
     return render_template( 'advanced/settings.html' , settings = settings)
 
 

@@ -1,6 +1,7 @@
 from .. import socketio
 from ..utils.nextsalah_api import NextSalahAPI
-
+from ..models import PrayerTimes
+from .. import db
 
 @socketio.on('connect', namespace='/dd')
 def ws_conn():
@@ -13,7 +14,10 @@ def ws_disconn():
 @socketio.on('get_new_prayertimes')
 def get_new_prayertimes(json):
     source, data = json['source'], json['data']
-    print('Getting new prayertimes ', source, data)
     new_prayertimes = NextSalahAPI.get_prayertimes(source, data)
-    print(new_prayertimes)
-    print('New prayertimes: ', "Done")
+    NextSalahAPI.save_prayertimes(new_prayertimes)
+
+    if new_prayertimes != None and new_prayertimes != []:
+        socketio.emit('alert', {'message': "New prayertimes successfully added."})
+    else:
+        socketio.emit('alert', {'message': "Failed to add new prayertimes."})

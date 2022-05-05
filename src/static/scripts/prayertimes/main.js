@@ -1,6 +1,12 @@
 var socket = io();
 
 const  send_source_info = (source, data) => {
+    let all_buttons  = document.querySelectorAll('button');
+    all_buttons.forEach(button => {
+        button.disabled = true;
+        button.style.opacity = 0.5;
+    });
+
     if (data.length > 0){
         console.log("Sending data to server");
         socket.emit('get_new_prayertimes', {
@@ -24,3 +30,15 @@ const get_prayertimes = ( source ) => {
     }
 
 }
+
+// Alert the user the result of the prayertimes request
+socket.on('alert', (data) => {
+    let all_buttons  = document.querySelectorAll('button');
+
+    all_buttons.forEach(button => {
+        button.disabled = false;
+        button.style.opacity = 1;
+    });
+
+    alert(data.message);
+});
