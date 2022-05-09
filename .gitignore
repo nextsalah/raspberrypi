@@ -2,6 +2,10 @@ src/static/.webassets-cache
 ./src/static/.webassets-cache
 .webassets-cache
 
+venv
+./venv
+*venv
+venv/*
 
 #  Database
 src/db/database.db
