@@ -1,16 +1,22 @@
 from flask_restful import Resource
+from src.routes.main import prayertimes
 from .. import api
-from ..models import Settings
+from ..models import PrayerTimes, Settings
 from .. import db
 
-class Todo(Resource):
-    def get(self, todo_id):
-        setting = Settings.query.filter_by(id=todo_id).one_or_none()
-        print(Settings.query.all())
-        if Settings.query.all() == []:
-            db.session.add(Settings())
-            db.session.commit()
-        
-        return setting.json()
+class SettingsAPI(Resource):
+    def get(self):
+        settings = Settings.query.filter_by( id = 1 ).one_or_none()
+        if settings:
+            return settings.json()
+        return {}, 404
 
-api.add_resource(Todo, '/todo/<todo_id>')
+class PrayerTimesAPI(Resource):
+    def post(self, source, data):
+        return {"source": source, "data":data}
+    def get(self):
+        prayertimes = PrayerTimes.query()
+        return [pt.json() for pt in prayertimes ]
+
+api.add_resource(SettingsAPI, '/settings')
+api.add_resource(PrayerTimesAPI, '/prayertimes')

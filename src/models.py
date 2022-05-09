@@ -2,7 +2,14 @@ from . import db
 from sqlalchemy_json import NestedMutableJson
 
 
-class Settings( db.Model ):
+class Base():
+    def json(row):
+        d = {}
+        for column in row.__table__.columns:
+            d[column.name] = str(getattr(row, column.name))
+
+        return d
+class Settings( Base, db.Model ):
     __tablename__ = 'Settings'
     
     id = db.Column(db.Integer, primary_key=True, default=1)
@@ -25,29 +32,10 @@ class Settings( db.Model ):
     iqamah_bool = db.Column(db.Boolean, nullable=False, default=False, server_default="False")
     qr_code_bool = db.Column(db.Boolean, nullable=False, default=False, server_default="False")
 
-
-    def json(self):
-        return {
-            'id': self.id,
-            'time_format': self.time_format,
-            'timezone': self.timezone,
-            'date_format': self.date_format,
-            'city': self.city,
-            'country': self.country,
-            'latitude': self.latitude,
-            'longitude': self.longitude,
-            'prayer_offset_json': self.prayer_offset_json,
-            'fixed_prayer_offset_json': self.fixed_prayer_offset_json,
-            'translate_json': self.translate_json,
-            'iqamah_bool': self.iqamah_bool,
-            'qr_code_bool': self.qr_code_bool
-        }
-        
-    
     def __repr__(self):
         return '<Settings %r>' % self.id
     
-class PrayerTimes( db.Model ):
+class PrayerTimes( Base , db.Model ):
     __tablename__ = 'PrayerTimes'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -58,24 +46,12 @@ class PrayerTimes( db.Model ):
     asr = db.Column(db.String, nullable=False)
     maghrib = db.Column(db.String, nullable=False)
     isha = db.Column(db.String, nullable=False)
-    
-    def json(self):
-        return {
-            'id': self.id,
-            'date': self.date,
-            'fajr': self.fajr,
-            'sunrise': self.sunrise,
-            'dhuhr': self.dhuhr,
-            'asr': self.asr,
-            'maghrib': self.maghrib,
-            'isha': self.isha
-        }
-    
+
     def __repr__(self):
         return '<PrayerTime %r>' % self.id
     
 
-class Images( db.Model ):
+class Images( Base , db.Model ):
     __tablename__ = 'Images'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     image_src = db.Column(db.String, nullable=False)
@@ -90,16 +66,10 @@ class Images( db.Model ):
         return '<Image %r>' % self.id
     
     
-class Videos( db.Model ):
+class Videos( Base , db.Model ):
     __tablename__ = 'Videos'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     video_src = db.Column(db.String, nullable=False)
-    
-    def json(self):
-        return {
-            'id': self.id,
-            'video_src': self.video
-        }
     
     def __repr__(self):
         return '<Video %r>' % self.id
@@ -110,21 +80,13 @@ class Medias( db.Model ):
     media_type = db.Column(db.Integer, nullable=False, default=0, server_default="0")
     delay = db.Column(db.Integer, nullable=False, default=10, server_default="10")
     google_slide = db.Column(db.String, nullable=True, default=None, server_default="None")
-    
-    def json(self):
-        return {
-            'id': self.id,
-            'delay': self.delay,
-            'media_type': self.media_type,
-            'google_slide': self.google_slide
-        }
-        
+
     def __repr__(self):
         return '<Media %r>' % self.id
     
 
 
-class Languages( db.Model ):
+class Languages( Base , db.Model ):
     __tablename__ =  'Languages'
     
     id  = db.Column(db.Integer, primary_key=True, autoincrement=True, default=1)
