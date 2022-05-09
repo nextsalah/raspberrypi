@@ -27,16 +27,13 @@ class NextSalahAPI():
     API_URL = "https://nextsalah.com/api/v1/prayertimes"
     OPTIONS = {
         "islamiska-forbundet" : {
-            "url" : "/islamiska-forbundet",
-            "argument" : "city",
+            "url" : "/islamiska-forbundet"
         },
         "vaktijaba": {
-            "url" : "/vaktijaba",
-            "argument" : "location_id",
+            "url" : "/vaktijaba"
         },
         "vaktijaeu": {
-            "url" : "/vaktijaeu",
-            "argument": "location_slug",
+            "url" : "/vaktijaeu"
         }
     }
     

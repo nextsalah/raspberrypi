@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, send_from_directory
+from flask import Blueprint, render_template, send_from_directory, request
 from src import app, db
 from src.models import Settings, Medias
 from ..utils.nextsalah_api import NextSalahAPI
@@ -41,7 +41,7 @@ def language():
     return render_template('dashboard/language.html')
 
 @main_routes.route( '/prayertimes' )
-def prayertimes():
+def prayertimes(): 
     options = NextSalahAPI.get_options()
     return render_template('dashboard/prayertimes.html', options = options)
 
