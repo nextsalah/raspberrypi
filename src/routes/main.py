@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, send_from_directory, request
 from src import app, db
-from src.models import Settings, Medias
+from ..models import Settings, Medias
 from ..utils.nextsalah_api import NextSalahAPI
+from ..utils.forms import SettingsForm
 import os
 
 main_routes = Blueprint( 'main' ,  __name__ )

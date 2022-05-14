@@ -1,5 +1,4 @@
 from . import db
-from sqlalchemy_json import NestedMutableJson
 from .utils.error_handling import catch_errors
 
 class Base():
