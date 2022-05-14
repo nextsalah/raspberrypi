@@ -5,6 +5,8 @@ from .config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_assets import Environment, Bundle
+from alembic import command
+
 
 # Initialize the full app
 app = Flask( __name__)
@@ -27,6 +29,12 @@ def create_app():
     db.init_app(app)
     db.create_all(app=app)
     migrate.init_app(app, db, render_as_batch=True)
+    with app.app_context():
+        print("Upgrading the database")
+        command.upgrade(migrate.get_config(), revision='head', sql=False, tag=None)
+    
+
+
     # Initialize SCSS for the assets
     scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css', depends=('scss/*.scss'))
     assets.register('scss_all', scss)

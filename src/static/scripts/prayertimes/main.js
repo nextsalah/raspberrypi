@@ -17,6 +17,7 @@ const sendData = async ( form ) => {
             'Content-Type': 'application/json'
         },
         method: 'POST',
+        timeout:1000000,
         body: JSON.stringify(data),
     } );
     if ( response.status === 200 ) {

@@ -1,22 +1,10 @@
 from ..models import PrayerTimes
 from .. import db
 from requests import get
-from functools import wraps
+from .error_handling import catch_errors
 import logging
 
 log = logging.getLogger(__name__)
-
-def catch_errors(f):
-    @wraps(f)
-    def wrapped(*args, **kwargs):
-        try:
-            result = f(*args, **kwargs)
-            return result
-        except (Exception, RuntimeError) as exc:
-            log.error('Error: ' + str(exc))
-            return []
-        
-    return wrapped
 
 class NextSalahAPI():
     """
@@ -37,7 +25,7 @@ class NextSalahAPI():
         }
     }
     
-
+    @catch_errors 
     def get_options():
         """
         It gets all the avvaliable options for the API
@@ -71,7 +59,8 @@ class NextSalahAPI():
         for key, value in OPTIONS.items():
             if key == source:
                 print(" Getting prayertimes from " + key + "...")
-                url = f'{API_URL}{value["url"]}?{value["argument"]}={data}'
+                arg_data = ''.join(k+'='+v+'&' for (k,v) in data.items())
+                url = f'{API_URL}{value["url"]}?{arg_data}'
                 prayertimes = get( url )
                 if prayertimes.status_code != 200:
                     raise Exception(f"API Error {prayertimes.status_code} - {url}")
@@ -83,9 +72,3 @@ class NextSalahAPI():
                 
                 raise Exception(f"Server error 500 - {source} - {data}")
 
-    @catch_errors
-    def save_prayertimes( new_prayertimes: list ):
-        if new_prayertimes != None and new_prayertimes != []:
-            db.session.query(PrayerTimes).delete()
-            [ db.session.add(PrayerTimes(**prayertimes)) for prayertimes in new_prayertimes ]
-            db.session.commit()

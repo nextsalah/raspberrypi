@@ -3,6 +3,7 @@ from .. import api
 from ..models import PrayerTimes, Settings
 from webargs import fields
 from webargs.flaskparser import use_kwargs, parser, abort
+from ..utils.nextsalah_api import NextSalahAPI
 
 class SettingsAPI(Resource):
     def get(self):
@@ -15,7 +16,8 @@ class PrayerTimesAPI(Resource):
     args = {'source': fields.Str(required=True),'data': fields.Dict(required=True)}
     @use_kwargs(args)
     def post(self, source, data):
-        return {"source": source, "data": data}, 200
+        new_prayertimes = NextSalahAPI.get_prayertimes(source, data)
+        return {"status": PrayerTimes.save_prayertimes(new_prayertimes)}, 200
     
     def get(self):
         prayertimes = PrayerTimes.query.all()
@@ -26,7 +28,7 @@ class PrayerTimesAPI(Resource):
             
 # This error handler is necessary for usage with Flask-RESTful.
 @parser.error_handler
-def handle_request_parsing_error(err, req, schema, *, error_status_code, error_headers):
+def handle_request_parsing_error(err):
     abort(404, errors=err.messages)
     
 api.add_resource(SettingsAPI, '/settings')
