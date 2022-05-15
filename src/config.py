@@ -5,4 +5,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///db/database.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     BABEL_DEFAULT_LOCALE = 'en'
-    
+    WTF_CSRF_ENABLED = False

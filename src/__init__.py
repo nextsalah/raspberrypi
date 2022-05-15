@@ -32,10 +32,10 @@ def create_app():
     
     # Initialize the database and register the models
     db.init_app(app)
-    db.create_all(app=app)
     migrate.init_app(app, db, render_as_batch=True)
     with app.app_context():
-        print("Upgrading the database")
+        print("Initializing the database...")
+        db.create_all(app=app)
         command.upgrade(migrate.get_config(), revision='head', sql=False, tag=None)
 
     # Initialize SCSS for the assets

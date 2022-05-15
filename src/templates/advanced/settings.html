@@ -1,54 +1,25 @@
-{% extends 'layout.html' %} {% block title %}Settings{% endblock %} {% block
-content %}
+{% extends 'layout.html' %} 
+{% block title %}Settings{% endblock %} 
 
-<h1>Settings</h1>
-<br />
-<form action="/settings/edit" id="settings-form" method="POST">
-  <div class="form-group">
-    <label for="time_format">Time Format</label>
-    <input type="text" name="time_format" value="{{ settings.time_format }}" />
-  </div>
-  <div class="form-group">
-    <label for="timezone">Timezone</label>
-    <input
-      type="number"
-      step="0.1"
-      min="-20"
-      max="20"
-      name="timezone"
-      value="{{ settings.timezone }}"
-    />
-  </div>
-  <div class="form-group">
-    <label for="timezone">Date Format</label>
-    <input type="text" name="date_format" value="{{ settings.date_format }}" />
-  </div>
-  <div class="form-group">
-    <label for="latitude">Latitude</label>
-    <input type="text" name="latitude" value="{{ settings.latitude }}" />
-  </div>
-  <div class="form-group">
-    <label for="longitude">Longitude</label>
-    <input type="text" name="longitude" value="{{ settings.longitude }}" />
-  </div>
-  <div class="form-group">
-    <label for="iqamah_bool">Should Iqamah be displayed?</label>
-    <input type="checkbox" name="iqamah_bool" {% if settings.iqamah_bool ==
-    'false' %}checked{% endif%} >
-  </div>
-  <div class="form-group">
-    <label for="qr_code_bool">QR Code</label>
-    <input type="checkbox" name="qr_code_bool" {% if settings.qr_code_bool ==
-    'false' %}checked{% endif%} >
-  </div>
+{% block content %}
+{% from "utils/_formhelpers.html" import render_field %}
+
+<form method="post">
+    <dl>
+    {{ render_field(form.time_format) }}
+    {{ render_field(form.date_format) }}
+    {{ render_field(form.iqamah_bool) }}
+    {{ render_field(form.qr_code_bool) }}
+    </dl>
 </form>
+
 {% endblock %} 
 
 {%block save_button%}
     <button
-      onclick="document.querySelector('#settings-form').submit()"
+      onclick="document.querySelector('form').submit()"
       type="submit"
-      class="submit button"
+      class="submit button  animate__animated animate__fadeInRight"
       >
         <img
             src="{{ url_for('static', filename='images/SVG/save.svg') }}"
@@ -60,3 +31,4 @@ content %}
       
     </button>
 {% endblock %}
+

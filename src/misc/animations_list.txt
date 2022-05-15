@@ -1,0 +1,4 @@
+
+No library needed for this css: https://www.csswand.dev/ (Buttons, Loading, Input underline)
+
+Generate animation easy: https://sarthology.github.io/Animatopy/
