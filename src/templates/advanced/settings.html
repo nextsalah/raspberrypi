@@ -1,34 +1,18 @@
 {% from "utils/_formhelpers.html" import render_field %}
+{% from "utils/_savebutton.html" import save_button %}
 
 {% extends 'layout.html' %} 
 {% block title %}Settings{% endblock %} 
 
 {% block content %}
 <form method="post">
-    <dl>
-    {{ render_field(form.time_format) }}
-    {{ render_field(form.date_format) }}
-    {{ render_field(form.iqamah_bool) }}
-    {{ render_field(form.qr_code_bool) }}
-    </dl>
+    {% for field in form %}
+        {{ render_field(field) }}
+    {% endfor %}
 </form>
 
 {% endblock %} 
 
 {%block save_button%}
-    <button
-      onclick="document.querySelector('form').submit()"
-      type="submit"
-      class="submit button  animate__animated animate__fadeInRight"
-      >
-        <img
-            src="{{ url_for('static', filename='images/SVG/save.svg') }}"
-            alt="Save ICON"
-            width="25"
-            height="25"
-        />
-      <span>Save</span>
-      
-    </button>
+  {{ save_button() }}
 {% endblock %}
-

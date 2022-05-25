@@ -1,0 +1,27 @@
+{% macro save_button() %}
+  <script>
+    const send_form = () => {
+      let form = document.querySelector('form');
+      if (form.checkValidity()) {
+        form.submit();
+      }
+      else{
+        form.reportValidity();
+      }
+    }
+  </script>
+  <button
+      onclick="send_form()"
+      type="submit"
+      class="submit button  animate__animated animate__fadeInRight"
+  >
+    <img
+        src="{{ url_for('static', filename='images/SVG/save.svg') }}"
+        alt="Save ICON"
+        width="25"
+        height="25"
+    />
+  <span>Save</span>
+
+</button>
+{% endmacro %}

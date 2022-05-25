@@ -5,7 +5,7 @@ from requests import request
 from src import app, db
 
 from ..models import Medias, Settings, Language
-from ..utils.forms import SettingsForm
+from ..utils.forms import LanguageForm, SettingsForm
 from ..utils.nextsalah_api import NextSalahAPI
 
 main_routes = Blueprint( 'main' ,  __name__ )
@@ -27,15 +27,16 @@ def media():
 @main_routes.route( '/language' , methods = ['GET', 'POST']  )
 def language():
     language =  Language.query.get_or_404(1)
-    form = SettingsForm(obj=language)
+    form = LanguageForm(obj=language)
     
     if form.validate_on_submit():
-        language.language = form.language.data
+        form.populate_obj(language)
         db.session.commit()
         flash('Language updated successfully.', 'success')
         return redirect(url_for('main.index'))
+    
 
-    return render_template('dashboard/language.html')
+    return render_template('dashboard/language.html', form = form)
 
 @main_routes.route( '/prayertimes' )
 def prayertimes(): 
@@ -45,7 +46,6 @@ def prayertimes():
 @main_routes.route( '/advanced' )
 def advanced():
     return render_template('dashboard/advanced.html')
-
 
 
 

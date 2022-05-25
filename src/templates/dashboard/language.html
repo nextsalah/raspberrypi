@@ -1,18 +1,40 @@
+{% from "utils/_formhelpers.html" import render_field %}
+{% from "utils/_savebutton.html" import save_button %}
 {% extends 'layout.html' %}
-
 
 {% block title %}Language{% endblock %}
 
-
 {% block content %}
 
-<form method="post">
-    <dl>
-    {{ render_field(form.time_format) }}
-    {{ render_field(form.date_format) }}
-    {{ render_field(form.iqamah_bool) }}
-    {{ render_field(form.qr_code_bool) }}
-    </dl>
-</form>
+<div class="flags">
+  <script src="{{ url_for('static', filename='scripts/language.js') }}"></script>
+  <button onclick="change_language('ba')">
+    <img src="{{ url_for('static', filename='images/Flags/Bosnia.png') }}" alt="Bosnia Flag">
+  </button>
+  <button onclick="change_language('se')">
+    <img src="{{ url_for('static', filename='images/Flags/Sweden.png') }}" alt="Sweden Flag">
+  </button>
+  <button onclick="change_language('en')">
+    <img src="{{ url_for('static', filename='images/Flags/USA.png') }}" alt="American Flag">
+  </button>
+</div>
+
+<button class="collapsible border-gradient">Custom Language Settings</button>
+<div class="collapsible-content">
+  <form method="post">
+      <dl>
+      {% for field in form %}
+          {{ render_field(field) }}
+      {% endfor %}
+      </dl>
+  </form>
+</div>
+<script src="{{ url_for('static', filename='scripts/collapsible.js') }}"></script>
 
 {% endblock %}
+
+
+{%block save_button%}
+  {{ save_button() }}
+{% endblock %}
+
