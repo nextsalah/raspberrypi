@@ -4,7 +4,7 @@ from flask import Blueprint, flash, render_template, send_from_directory, redire
 from requests import request
 from src import app, db
 
-from ..models import Medias, Settings
+from ..models import Medias, Settings, Language
 from ..utils.forms import SettingsForm
 from ..utils.nextsalah_api import NextSalahAPI
 
@@ -24,8 +24,17 @@ def index():
 def media():
     return render_template('dashboard/media.html')
 
-@main_routes.route( '/language' )
+@main_routes.route( '/language' , methods = ['GET', 'POST']  )
 def language():
+    language =  Language.query.get_or_404(1)
+    form = SettingsForm(obj=language)
+    
+    if form.validate_on_submit():
+        language.language = form.language.data
+        db.session.commit()
+        flash('Language updated successfully.', 'success')
+        return redirect(url_for('main.index'))
+
     return render_template('dashboard/language.html')
 
 @main_routes.route( '/prayertimes' )
@@ -76,6 +85,10 @@ def before_first_request():
     if Medias.query.one_or_none() is None:
         print(' Inserted a new Media object into the database with id = 1.')
         db.session.add( Medias( id = 1))
+        
+    if Language.query.one_or_none() is None:
+        print(' Inserted a new Language object into the database with id = 1.')
+        db.session.add( Language( id = 1))
         
     db.session.commit()
 @app.errorhandler( 404 )

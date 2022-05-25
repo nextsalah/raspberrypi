@@ -125,3 +125,16 @@ class Language( Base , db.Model ):
     november = db.Column(db.String, nullable=False, default='November', server_default='November')
     december = db.Column(db.String, nullable=False, default='December', server_default='December')
 
+    # Prayer Times
+    fajr = db.Column(db.String, nullable=False, default='Fajr', server_default='Fajr')
+    sunrise = db.Column(db.String, nullable=False, default='Sunrise', server_default='Sunrise')
+    dhuhr = db.Column(db.String, nullable=False, default='Dhuhr', server_default='Dhuhr')
+    asr = db.Column(db.String, nullable=False, default='Asr', server_default='Asr')
+    maghrib = db.Column(db.String, nullable=False, default='Maghrib', server_default='Maghrib')
+    isha = db.Column(db.String, nullable=False, default='Isha', server_default='Isha')
+    
+    prayer = db.Column(db.String, nullable=False, default='Prayer', server_default='Prayer')
+    iqamah = db.Column(db.String, nullable=False, default='Iqamah', server_default='Iqamah')
+    begins = db.Column(db.String, nullable=False, default='Begins', server_default='Begins')
+    next = db.Column(db.String, nullable=False, default='Next...', server_default='Next...')
+    turn_off_phone = db.Column(db.String, nullable=False, default='Please, turn off your phones', server_default='Please, turn off your phones')

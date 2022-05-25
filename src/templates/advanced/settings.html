@@ -1,9 +1,9 @@
+{% from "utils/_formhelpers.html" import render_field %}
+
 {% extends 'layout.html' %} 
 {% block title %}Settings{% endblock %} 
 
 {% block content %}
-{% from "utils/_formhelpers.html" import render_field %}
-
 <form method="post">
     <dl>
     {{ render_field(form.time_format) }}

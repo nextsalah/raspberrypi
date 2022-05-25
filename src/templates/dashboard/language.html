@@ -6,6 +6,13 @@
 
 {% block content %}
 
-<p>Language</p>
+<form method="post">
+    <dl>
+    {{ render_field(form.time_format) }}
+    {{ render_field(form.date_format) }}
+    {{ render_field(form.iqamah_bool) }}
+    {{ render_field(form.qr_code_bool) }}
+    </dl>
+</form>
 
 {% endblock %}
