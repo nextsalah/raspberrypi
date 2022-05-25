@@ -13,7 +13,13 @@ const transitionToPage = (href) =>{
             window.location.href = href;
         }
         else{
-            history.back(-1);
+
+            if( [ '/advanced' ].includes(window.location.pathname) || window.location.href === document.referrer){
+                window.location.href = '/';
+            }
+            else{
+                window.location.href = document.referrer;
+            }
         }
     }, 400)
 }

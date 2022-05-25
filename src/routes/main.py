@@ -16,6 +16,9 @@ main_routes = Blueprint( 'main' ,  __name__ )
 def index():
     return render_template( 'index.html' , home = True)
 
+
+
+
  # -------- Dashboard --------
 @main_routes.route( '/media' )
 def media():
@@ -34,6 +37,9 @@ def prayertimes():
 def advanced():
     return render_template('dashboard/advanced.html')
 
+
+
+
 # -------- Advanced --------
 @main_routes.route( '/settings' , methods = ['GET', 'POST'] )
 def settings():
@@ -51,6 +57,9 @@ def settings():
 @main_routes.route( '/screen' , methods = [ 'GET' ] )
 def screen():
     return "Screen"
+
+
+
 
 
 # -------- Utils --------
