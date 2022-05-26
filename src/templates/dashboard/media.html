@@ -1,11 +1,21 @@
+{% from "utils/_formhelpers.html" import render_field %}
+{% from "utils/_savebutton.html" import save_button %}
 {% extends 'layout.html' %}
 
 
 {% block title %}Media{% endblock %}
 
-
 {% block content %}
 
 <p>Media</p>
+<form method="post">
+    {% for field in form %}
+        {{ render_field(field) }}
+    {% endfor %}
+</form>
 
+{% endblock %}
+
+{%block save_button%}
+  {{ save_button() }}
 {% endblock %}
