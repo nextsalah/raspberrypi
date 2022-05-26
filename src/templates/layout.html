@@ -17,12 +17,13 @@
     />
 
   </head>
+  
 
   <body>
     <header>
       <a class="logo" href="/">
         <img
-          src="{{ url_for('static', filename='images/SVG/nextsalah.svg') }}"
+          src="{{ url_for('static', filename='images/svgs/nextsalah.svg') }}"
           alt="NextSalah"
           class="gradient"
           id="gradient_img"
@@ -50,7 +51,7 @@
       {% if not home %}
         <a class="link_go_back button  animate__animated animate__fadeInLeft">
           <img
-            src="{{url_for('static', filename='images/SVG/back.svg')}}"
+            src="{{url_for('static', filename='images/svgs/back.svg')}}"
             alt="Settings"
             width="20"
             height="30"

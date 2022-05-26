@@ -1,7 +1,6 @@
 import os
 
 from flask import Blueprint, flash, render_template, send_from_directory, redirect, url_for
-from requests import request
 from src import app, db
 
 from ..models import Medias, Settings, Language
@@ -48,7 +47,6 @@ def advanced():
     return render_template('dashboard/advanced.html')
 
 
-
 # -------- Advanced --------
 @main_routes.route( '/settings' , methods = ['GET', 'POST'] )
 def settings():
@@ -69,7 +67,7 @@ def screen():
 
 
 
-
+    
 
 # -------- Utils --------
 @app.route('/favicon.ico')

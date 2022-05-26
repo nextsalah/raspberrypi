@@ -214,7 +214,7 @@ body > header {
       width: 100%;
       transition: 0.4s;
     }
-    input[type="text"], input[type="number"]{
+    input[type="text"], input[type="number"], select{
       padding: 0.5rem 0.7rem;
       color: $text_color;
       width: 100%;

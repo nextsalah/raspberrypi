@@ -101,30 +101,10 @@ class Language( Base , db.Model ):
     __tablename__ = 'Language'
     
     id = db.Column(db.Integer, primary_key=True, default=1)
-
-    # Weekdays
-    monday = db.Column(db.String, nullable=False, default='Monday', server_default='Monday')
-    tuesday = db.Column(db.String, nullable=False, default='Tuesday', server_default='Tuesday')
-    wednesday = db.Column(db.String, nullable=False, default='Wednesday', server_default='Wednesday')
-    thursday = db.Column(db.String, nullable=False, default='Thursday', server_default='Thursday')
-    friday = db.Column(db.String, nullable=False, default='Friday', server_default='Friday')
-    saturday = db.Column(db.String, nullable=False, default='Saturday', server_default='Saturday')
-    sunday = db.Column(db.String, nullable=False, default='Sunday', server_default='Sunday')
-
-    # Months
-    january = db.Column(db.String, nullable=False, default='January', server_default='January')
-    february = db.Column(db.String, nullable=False, default='February', server_default='February')
-    march = db.Column(db.String, nullable=False, default='March', server_default='March')
-    april = db.Column(db.String, nullable=False, default='April', server_default='April')
-    may = db.Column(db.String, nullable=False, default='May', server_default='May')
-    june = db.Column(db.String, nullable=False, default='June', server_default='June')
-    july = db.Column(db.String, nullable=False, default='July', server_default='July')
-    august = db.Column(db.String, nullable=False, default='August', server_default='August')
-    september = db.Column(db.String, nullable=False, default='September', server_default='September')
-    october = db.Column(db.String, nullable=False, default='October', server_default='October')
-    november = db.Column(db.String, nullable=False, default='November', server_default='November')
-    december = db.Column(db.String, nullable=False, default='December', server_default='December')
-
+    
+    # Language Data
+    language_code = db.Column(db.String, nullable=False, default='en', server_default='en')
+    
     # Prayer Times
     fajr = db.Column(db.String, nullable=False, default='Fajr', server_default='Fajr')
     sunrise = db.Column(db.String, nullable=False, default='Sunrise', server_default='Sunrise')
@@ -133,6 +113,7 @@ class Language( Base , db.Model ):
     maghrib = db.Column(db.String, nullable=False, default='Maghrib', server_default='Maghrib')
     isha = db.Column(db.String, nullable=False, default='Isha', server_default='Isha')
     
+    # Other
     prayer = db.Column(db.String, nullable=False, default='Prayer', server_default='Prayer')
     iqamah = db.Column(db.String, nullable=False, default='Iqamah', server_default='Iqamah')
     begins = db.Column(db.String, nullable=False, default='Begins', server_default='Begins')

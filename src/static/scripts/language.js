@@ -4,25 +4,6 @@ function change_language( language ) {
     switch( language ){
         case 'en':
             translate_text = [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday",
-                "January",
-                "February", 
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
                 "Fajr",
                 "Sunrise",
                 "Dhuhr",
@@ -36,27 +17,8 @@ function change_language( language ) {
                 "Please, turn off your phones"
             ];
             break;
-        case 'se':
+        case 'sv':
             translate_text = översätt_text = översätt_text = [
-                "Måndag",
-                "Tisdag",
-                "Onsdag",
-                "Torsdag",
-                "Fredag",
-                "Lördag",
-                "Söndag",
-                "Januari",
-                "Februari",
-                "Mars",
-                "April",
-                "Maj",
-                "Juni",
-                "Juli",
-                "Augusti",
-                "September",
-                "Oktober",
-                "November",
-                "December",
                 "Fajr",
                 "Soluppgång",
                 "Dhuhr",
@@ -70,27 +32,8 @@ function change_language( language ) {
                 "Snälla, stäng av dina telefoner"
             ];
             break;
-        case 'ba':
+        case 'bs':
             translate_text = [
-                "Ponedjeljak", 
-                "Utorak", 
-                "Srijeda", 
-                "Četvrtak", 
-                "Petak", 
-                "Subota", 
-                "Nedjelja", 
-                "Januar",
-                "Februar",
-                "Mart",
-                "April",
-                "Maj",
-                "Juni",
-                "Juli",
-                "Avgust",
-                "Septembar",
-                "Oktobar",
-                "Novembar",
-                "Decembar",
                 "Zora", 
                 "Izlazak sunca" , 
                 "Podne", 
@@ -111,6 +54,7 @@ function change_language( language ) {
         for( let i = 0; i < inputs.length; i++ ){
             inputs[i].value = translate_text[i];
         }
+        document.querySelector("#language_code").value = language;
     }
     catch( e ){
         console.log( e );

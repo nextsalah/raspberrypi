@@ -9,6 +9,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_assets import Environment, Bundle
 from flask_babel import Babel
+from flask_compress import Compress
+
 from alembic import command
 
 
@@ -20,6 +22,7 @@ db = SQLAlchemy( )
 migrate = Migrate(app, db, render_as_batch=True)
 assets = Environment(app)
 babel = Babel(app)
+compress = Compress()
 
 def create_app():    
     """Create an application."""
@@ -41,7 +44,8 @@ def create_app():
     # Initialize SCSS for the assets
     scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css', depends=('scss/*.scss'))
     assets.register('scss_all', scss)
-
+    compress.init_app(app)
+    
     # Register main routes
     from .routes.main import main_routes
     app.register_blueprint( main_routes, url_prefix='/')

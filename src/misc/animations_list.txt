@@ -2,3 +2,5 @@
 No library needed for this css: https://www.csswand.dev/ (Buttons, Loading, Input underline)
 
 Generate animation easy: https://sarthology.github.io/Animatopy/
+
+Reset animation: https://stackoverflow.com/questions/6268508/restart-animation-in-css3-any-better-way-than-removing-the-element

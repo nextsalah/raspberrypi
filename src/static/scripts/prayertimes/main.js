@@ -27,7 +27,7 @@ const send_data = async ( form ) => {
         }
     }
     hide_loader(false);
-    return false;
+    return false; 
 }
 
 const hide_loader = ( status ) => {

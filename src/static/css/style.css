@@ -167,7 +167,7 @@ body > header {
             width: 100%;
             transition: 0.4s; }
             .field .input-container input[type="text"],
-            .field .input-container input[type="number"] {
+            .field .input-container input[type="number"], .field .input-container select {
               padding: 0.5rem 0.7rem;
               color: #EEEEEE;
               width: 100%;
