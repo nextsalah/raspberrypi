@@ -19,9 +19,9 @@ def index():
 
 
  # -------- Dashboard --------
-@main_routes.route( '/media' )
-def media():
-    return render_template('dashboard/media.html')
+@main_routes.route( '/theme' )
+def theme():
+    return render_template('dashboard/theme.html')
 
 @main_routes.route( '/language' , methods = ['GET', 'POST']  )
 def language():
@@ -59,7 +59,7 @@ def settings():
         flash('Settings saved successfully!', 'success')
         return redirect(url_for('main.index')) 
     
-    return render_template( 'advanced/settings.html' , form = form)
+    return render_template( 'dashboard/settings.html' , form = form)
 
 @main_routes.route( '/screen' , methods = [ 'GET' ] )
 def screen():

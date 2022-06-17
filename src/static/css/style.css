@@ -104,28 +104,31 @@ body > header {
         Arial, sans-serif !important;
     color: #EEEEEE;
     padding: 1.5rem 1rem; }
+    .buttons > a:last-child {
+      background-color: #222831;
+      border: #05c43b solid 0.2rem; }
 
-    .button {
-      display: inline-flex;
-      cursor: pointer;
-      gap: 0.9rem;
-      align-items: center;
-      font-size: 1.5rem;
-      font-weight: 800;
-      border-radius: 6px;
-      padding: 0.8rem 1.2rem;
-      color: #EEEEEE;
-      height: 3rem;
-      border: none;
-      background-color: #05c43b; }
-      .button.link_go_back {
-        background-color: #f02a2e; }
-        .button.submit {
-          background-color: #080; }
-          .button:hover, .button:focus {
-            outline: none;
-            box-shadow: none;
-            opacity: 0.9; }
+.button {
+  display: inline-flex;
+  cursor: pointer;
+  gap: 0.9rem;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-radius: 6px;
+  padding: 0.8rem 1.2rem;
+  color: #EEEEEE;
+  height: 3rem;
+  border: none;
+  background-color: #05c43b; }
+  .button.link_go_back {
+    background-color: #f02a2e; }
+    .button.submit {
+      background-color: #080; }
+      .button:hover, .button:focus {
+        outline: none;
+        box-shadow: none;
+        opacity: 0.9; }
 
 .actions {
   display: flex;
