@@ -3,7 +3,7 @@ import os
 from flask import Blueprint, flash, render_template, send_from_directory, redirect, url_for
 from src import app, db
 
-from ..models import Medias, Settings, Language
+from ..models import Settings, Language
 from ..utils.forms import LanguageForm, SettingsForm
 from ..utils.nextsalah_api import NextSalahAPI
 
@@ -80,10 +80,7 @@ def before_first_request():
         db.session.add( Settings(id = 1 ))
         print(' Inserted a new Setting object into the database with id = 1.')
         
-    if Medias.query.one_or_none() is None:
-        print(' Inserted a new Media object into the database with id = 1.')
-        db.session.add( Medias( id = 1))
-        
+
     if Language.query.one_or_none() is None:
         print(' Inserted a new Language object into the database with id = 1.')
         db.session.add( Language( id = 1))

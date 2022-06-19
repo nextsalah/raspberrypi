@@ -86,17 +86,6 @@ class Videos( Base , db.Model ):
     def __repr__(self):
         return '<Video %r>' % self.id
     
-class Medias( db.Model ):
-    __tablename__ = 'Medias'
-    id = db.Column(db.Integer, primary_key=True, default=1)
-    media_type = db.Column(db.Integer, nullable=False, default=0, server_default="0")
-    delay = db.Column(db.Integer, nullable=False, default=10, server_default="10")
-    google_slide = db.Column(db.String, nullable=True, default=None, server_default="None")
-
-    def __repr__(self):
-        return '<Media %r>' % self.id
-    
-
 class Language( Base , db.Model ):
     __tablename__ = 'Language'
     
