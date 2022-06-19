@@ -8,12 +8,8 @@ venv
 venv/*
 
 #  Database
-src/db/database.db
 ./src/db/database.db
-database.db
-/db
 /db/database.db
-database.db
 
 
 # Byte-compiled / optimized / DLL files
