@@ -7,6 +7,9 @@ venv
 *venv
 venv/*
 
+
+log.txt
+
 #  Database
 ./src/db/database.db
 /db/database.db

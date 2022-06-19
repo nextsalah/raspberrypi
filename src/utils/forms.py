@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SelectField
+from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired, Length
 from .. import app
-from src.models import Language
 
 class SettingsForm(FlaskForm):
     """

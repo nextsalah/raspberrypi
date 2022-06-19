@@ -15,7 +15,7 @@ class NextSalahAPI():
     API_URL = "https://nextsalah.com/api/v1/prayertimes"
     OPTIONS = {
         "islamiska-forbundet" : {
-            "url" : "/islamiska-forbundet"
+            "url" : "/islamiska-forbundet2"
         },
         "vaktijaba": {
             "url" : "/vaktijaba"
@@ -32,15 +32,14 @@ class NextSalahAPI():
         """
         output = {}
         for key, value in OPTIONS.items():
-            try:
-                url = API_URL + value['url'] + "/locations" 
-                response = get( url )
-                if response.status_code != 200:
-                    raise RuntimeError( "Error: " + str(response.status_code) )
-                output[key] = response.json()
-            except Exception as exc:
-                log.error('API Error: ' + str(exc) + " " + str(url))
+            url = API_URL + value['url'] + "/locations" 
+            response = get( url )
+            if response.status_code != 200:
                 output[key] = []
+                raise RuntimeError( "Error: " + str(response.status_code) )
+            else:
+                output[key] = response.json()
+
                 
         return output
 
