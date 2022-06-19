@@ -136,6 +136,7 @@ body > header {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
   color: $text_color;
   padding: 1.5rem 1rem;
+  text-align: center;
   &:last-child{
     background-color: $background ;
     border: #05c43b solid 0.2rem;

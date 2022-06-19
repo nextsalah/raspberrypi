@@ -103,7 +103,8 @@ body > header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans',
         Arial, sans-serif !important;
     color: #EEEEEE;
-    padding: 1.5rem 1rem; }
+    padding: 1.5rem 1rem;
+    text-align: center; }
     .buttons > a:last-child {
       background-color: #222831;
       border: #05c43b solid 0.2rem; }

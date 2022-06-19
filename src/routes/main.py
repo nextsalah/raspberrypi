@@ -1,6 +1,7 @@
+from email.policy import default
 import os
 
-from flask import Blueprint, flash, render_template, send_from_directory, redirect, url_for
+from flask import Blueprint, flash, render_template, send_from_directory, redirect, url_for, send_from_directory
 from src import app, db
 
 from ..models import Settings, Language
@@ -15,6 +16,16 @@ main_routes = Blueprint( 'main' ,  __name__ )
 def index():
     return render_template( 'index.html' , home = True)
 
+
+# -------- Main Screen --------
+@main_routes.route( '/screen', defaults={'path': ''} )
+@main_routes.route( '/screen/<path:path>' )
+def main_screen( path ):
+    debug_path = '/home/ismail424/nextsalah/raspberrypi/venv/test'
+    if path != "" and os.path.exists( debug_path + '/' + path ):
+        return send_from_directory( debug_path , path )
+    else:
+        return send_from_directory(debug_path, 'index.html')
 
 
 
@@ -60,14 +71,6 @@ def settings():
         return redirect(url_for('main.index')) 
     
     return render_template( 'dashboard/settings.html' , form = form)
-
-@main_routes.route( '/screen' , methods = [ 'GET' ] )
-def screen():
-    return "Screen"
-
-
-
-    
 
 # -------- Utils --------
 @app.route('/favicon.ico')
