@@ -1,10 +1,8 @@
 from ..models import PrayerTimes
 from .. import db
 from requests import get
-from .error_handling import catch_errors
-import logging
+from .error_handling import catch_errors, send_error_log
 
-log = logging.getLogger(__name__)
 
 class NextSalahAPI():
     """
@@ -15,7 +13,7 @@ class NextSalahAPI():
     API_URL = "https://nextsalah.com/api/v1/prayertimes"
     OPTIONS = {
         "islamiska-forbundet" : {
-            "url" : "/islamiska-forbundet2"
+            "url" : "/islamiska-forbundet"
         },
         "vaktijaba": {
             "url" : "/vaktijaba"
@@ -32,14 +30,16 @@ class NextSalahAPI():
         """
         output = {}
         for key, value in OPTIONS.items():
-            url = API_URL + value['url'] + "/locations" 
-            response = get( url )
-            if response.status_code != 200:
+            try:
+                url = API_URL + value['url'] + "/locations" 
+                response = get( url )
+                if response.status_code != 200:
+                    response.raise_for_status()
+                else:
+                    output[key] = response.json()
+            except Exception as exc:
+                send_error_log(exc)
                 output[key] = []
-                raise RuntimeError( "Error: " + str(response.status_code) )
-            else:
-                output[key] = response.json()
-
                 
         return output
 
@@ -62,7 +62,7 @@ class NextSalahAPI():
                 url = f'{API_URL}{value["url"]}?{arg_data}'
                 prayertimes = get( url )
                 if prayertimes.status_code != 200:
-                    raise Exception(f"API Error {prayertimes.status_code} - {url}")
+                    prayertimes.raise_for_status()
                 
                 prayertimes_json = prayertimes.json()
                 if prayertimes_json['success']:

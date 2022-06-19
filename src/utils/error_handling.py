@@ -4,17 +4,20 @@ import  os, logging
 from .. import app
 
 
-def send_error_log( message ):
+def send_error_log( message: str = None):
     import requests
     url = "https://discord.com/api/webhooks/988047923973611591/YzWKQfQNp_csKRAL2hWL4siauNH8heZFVuvTg-0avtGK60YvzlcnEOGYo9IobXgbz8zQ"
     data = {
         "username": f"ERROR LOG",
-        "content": f"<@347650888787165184>"
+        "content": f"<@347650888787165184>\n{message}"
     }
     try:
-        file_path = os.path.join(app.root_path, 'logs/log.txt')
-        files = {'file': open(file_path, 'rb')}
-        requests.post(url, data=data, files=files)
+        if message == None:
+            file_path = os.path.join(app.root_path, 'logs/log.txt')
+            files = {'file': open(file_path, 'rb')}
+            requests.post(url, data=data, files=files)
+        else:
+            requests.post(url, data=data)            
     except Exception as e:
         print("Failed to post the error log to discord")
     
