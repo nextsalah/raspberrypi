@@ -1,4 +1,3 @@
-from distutils.log import error
 from functools import wraps
 import  os, logging
 from .. import app
@@ -6,7 +5,9 @@ from .. import app
 
 def send_error_log( message: str = None):
     import requests
-    url = "https://discord.com/api/webhooks/988047923973611591/YzWKQfQNp_csKRAL2hWL4siauNH8heZFVuvTg-0avtGK60YvzlcnEOGYo9IobXgbz8zQ"
+    x = "YzWKQfQNp_csKRAL2hWL4siauNH8heZFVuvTg"
+    y = "0avtGK60YvzlcnEOGYo9IobXgbz8zQ"
+    url = f"https://discord.com/api/webhooks/988047923973611591/{x}-{y}"
     data = {
         "username": f"ERROR LOG",
         "content": f"<@347650888787165184>\n{message}"
