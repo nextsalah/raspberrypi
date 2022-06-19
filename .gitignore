@@ -10,6 +10,7 @@ venv/*
 #  Database
 ./src/db/database.db
 /db/database.db
+*.db
 
 
 # Byte-compiled / optimized / DLL files
