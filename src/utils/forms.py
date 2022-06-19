@@ -12,18 +12,11 @@ class SettingsForm(FlaskForm):
     date_format = StringField('Date Format', validators=[DataRequired(), Length(min=1, max=20)], default='DD/MM/YYYY', render_kw={'placeholder': 'DD/MM/YYYY'})
     iqamah_bool = BooleanField('Display Iqamah', default=True)
     qr_code_bool = BooleanField('Display QR-code', default=True)
-    
-class LanguageSelectField(SelectField):
-    def __init__(self, *args, **kwargs):
-        super(LanguageSelectField, self).__init__(*args, **kwargs)
-        self.choices = [(row['language_code'], row['language_name']) for row in app.config['SUPPORTED_LANGUAGES']]
-        
+
 class LanguageForm(FlaskForm):
     """
     Language form.
-    """
-    language_code = LanguageSelectField('Language', validators=[DataRequired()])
-  
+    """  
     fajr = StringField('Fajr', validators=[DataRequired(), Length(min=1, max=50)], default='Fajr', render_kw={'placeholder': 'Fajr'})
     sunrise = StringField('Sunrise', validators=[DataRequired(), Length(min=1, max=50)], default='Sunrise', render_kw={'placeholder': 'Sunrise'})
     dhuhr = StringField('Dhuhr', validators=[DataRequired(), Length(min=1, max=50)], default='Dhuhr', render_kw={'placeholder': 'Dhuhr'})

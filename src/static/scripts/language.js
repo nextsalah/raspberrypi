@@ -54,7 +54,6 @@ function change_language( language ) {
         for( let i = 0; i < inputs.length; i++ ){
             inputs[i].value = translate_text[i];
         }
-        document.querySelector("#language_code").value = language;
     }
     catch( e ){
         console.log( e );
