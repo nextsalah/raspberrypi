@@ -39,8 +39,10 @@ def create_app():
     with app.app_context():
         print('Creating the database tables if they do not exist...')
         db.create_all(app=app)
-        command.upgrade(migrate.get_config(), revision='head', sql=False, tag=None)
-
+        try:
+            command.upgrade(migrate.get_config(), revision='head', sql=False, tag=None)
+        except Exception:
+            pass
     # Initialize SCSS for the assets
     scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css', depends=('scss/*.scss'))
     assets.register('scss_all', scss)

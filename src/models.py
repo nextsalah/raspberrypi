@@ -15,8 +15,8 @@ class Settings( Base, db.Model ):
     id = db.Column(db.Integer, primary_key=True, default=1)
 
     # Theme Settings
-    theme_path_relative = db.Column(db.String(255), default='', server_default='')
-    theme_path_full = db.Column(db.String(255), default=os.path.join(app.root_path, 'static/theme/'), server_default=os.path.join(app.root_path, 'static/theme/'))
+    theme_name = db.Column(db.String(255), default='', server_default='')
+    theme_path = db.Column(db.String(500), default='', server_default='')
 
     # Format Data
     time_format = db.Column(db.String, nullable=False, default='%H:%M:%S', server_default='%H:%M:%S')
