@@ -53,7 +53,7 @@ def catch_errors(function):
             err += function.__name__
 
             logger.exception(err)
-            send_error_log(err)
+            send_error_log()
             
             return 
     return wrapped

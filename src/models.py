@@ -92,6 +92,7 @@ class Videos( Base , db.Model ):
         return '<Video %r>' % self.id
     
 class Language( Base , db.Model ):
+    
     __tablename__ = 'Language'
     
     id = db.Column(db.Integer, primary_key=True, default=1)

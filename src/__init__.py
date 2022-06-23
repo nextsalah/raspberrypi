@@ -37,7 +37,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
     with app.app_context():
-        print("Initializing the database...")
+        print('Creating the database tables if they do not exist...')
         db.create_all(app=app)
         command.upgrade(migrate.get_config(), revision='head', sql=False, tag=None)
 
