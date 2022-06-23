@@ -15,7 +15,6 @@ class Settings( Base, db.Model ):
     id = db.Column(db.Integer, primary_key=True, default=1)
 
     # Theme Settings
-    theme_name = db.Column(db.String(255), default='', server_default='')
     theme_path = db.Column(db.String(500), default='', server_default='')
 
     # Format Data

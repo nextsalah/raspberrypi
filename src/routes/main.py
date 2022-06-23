@@ -77,6 +77,7 @@ def settings():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico')
+    
 @app.before_first_request
 def before_first_request():
     if Settings.query.one_or_none() is None:
@@ -89,6 +90,8 @@ def before_first_request():
         db.session.add( Language( id = 1))
         
     db.session.commit()
+    
+    
 @app.errorhandler( 404 )
 def page_not_found( error):
     return render_template('generic/404.html'), 404
