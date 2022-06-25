@@ -1,6 +1,5 @@
 from . import db, app
 from .utils.error_handling import catch_errors
-import os
 
 class Base():
     def json(row):

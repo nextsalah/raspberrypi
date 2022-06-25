@@ -1,4 +1,5 @@
 # Importing flask and the config
+from importlib.resources import path
 from operator import imod
 from flask import Flask
 from .config import Config
@@ -13,7 +14,7 @@ from flask_babel import Babel
 from flask_compress import Compress
 
 from alembic import command
-import os
+import os, glob
 
 # Initialize the app and libraries
 app = Flask( __name__)
@@ -44,12 +45,18 @@ def create_app():
         try:
             migrate.init_app(app, db, render_as_batch=True)
             command.upgrade(migrate.get_config(), revision='head', sql=False, tag=None)
-        except Exception:
-            print("Failed to upgrade the database")
+        except Exception:            
             # Delete the database if it already exists
             if os.path.exists(os.path.join(app.root_path, 'db/database.db')):
                 os.remove(os.path.join(app.root_path, 'db/database.db'))
-            
+                
+            # Remove the migration files
+            path = app.root_path[:-4] + '/migrations/versions/*.py'
+            files = glob.glob(path)
+            for f in files:
+                os.remove(f)
+                
+                
 
     # Initialize SCSS for the assets
     scss = Bundle('scss/style.scss', filters='pyscss', output='css/style.css', depends=('scss/*.scss'))
