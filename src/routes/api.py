@@ -29,15 +29,6 @@ class PrayerTimesAPI(Resource):
             abort(404, message="No prayer times found.")
             
                         
-# This decorator is used to log errors in the API.
-def catch_api_errors(func):
-    def wrapped(self, *args, **kwargs):
-        try:
-            return func(self, *args, **kwargs)
-        except Exception as e:
-            return abort(500, message=str(e))
-    return wrapped
-
 
 class ThemeAPI:
     class Config(Resource):

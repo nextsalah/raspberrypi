@@ -67,5 +67,5 @@ def catch_api_errors(func):
         try:
             return func(self, *args, **kwargs)
         except Exception as e:
-            return abort(500, message=str(e))
+            return abort(404, message=str(e))
     return wrapped
