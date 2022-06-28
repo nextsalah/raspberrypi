@@ -1,4 +1,5 @@
 from functools import wraps
+from flask_restful import abort
 import  os, logging
 from .. import app
 
@@ -41,6 +42,7 @@ def create_logger():
     return logger
 
 
+# This decorator is used to log general errors.
 def catch_errors(function):
     @wraps(function)
     def wrapped(*args, **kwargs):
@@ -58,3 +60,12 @@ def catch_errors(function):
             return 
     return wrapped
 
+
+# This decorator is used to log errors in the API.
+def catch_api_errors(func):
+    def wrapped(self, *args, **kwargs):
+        try:
+            return func(self, *args, **kwargs)
+        except Exception as e:
+            return abort(500, message=str(e))
+    return wrapped

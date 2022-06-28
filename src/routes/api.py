@@ -1,10 +1,11 @@
-from flask_restful import Resource, abort
-from .. import api
-from ..models import PrayerTimes, Settings
-from webargs import fields
-from webargs.flaskparser import use_kwargs, parser, abort
+from webargs.flaskparser import use_kwargs, parser
 from ..utils.nextsalah_api import NextSalahAPI
+from ..models import PrayerTimes, Settings
+from flask_restful import Resource, abort
 from ..utils.theme import Theme
+from webargs import fields
+from ..utils.error_handling import catch_api_errors
+from .. import api
 
 class SettingsAPI(Resource):
     def get(self):
@@ -27,19 +28,35 @@ class PrayerTimesAPI(Resource):
         else:
             abort(404, message="No prayer times found.")
             
-            
-class ThemeSettingsAPI(Resource):
-    def get(self):
-        settings = Settings.query.filter_by( id = 1 ).one_or_none()
-        if settings.theme_path != '':
-            return Theme(settings.theme_path).config
-        return {}, 404
-    
+                        
+# This decorator is used to log errors in the API.
+def catch_api_errors(func):
+    def wrapped(self, *args, **kwargs):
+        try:
+            return func(self, *args, **kwargs)
+        except Exception as e:
+            return abort(500, message=str(e))
+    return wrapped
+
+
+class ThemeAPI:
+    class Config(Resource):
+        @catch_api_errors
+        def get(self):
+            return Theme().config
+
+    class Variables(Resource):
+        @catch_api_errors
+        def get(self):
+            return Theme().variables
+
 # This error handler is necessary for usage with Flask-RESTful.
 @parser.error_handler
 def handle_request_parsing_error(err):
     abort(404, errors=err.messages)
+
     
 api.add_resource(SettingsAPI, '/settings')
 api.add_resource(PrayerTimesAPI, '/prayertimes')
-api.add_resource(ThemeSettingsAPI, '/themesettings')
+api.add_resource(ThemeAPI.Config, '/theme/config')
+api.add_resource(ThemeAPI.Variables, '/theme/variables')

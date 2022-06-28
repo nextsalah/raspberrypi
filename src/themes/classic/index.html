@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Theme</title>
+</head>
+<body>
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/theme/variables')
+            const data = await response.json()
+            data.forEach(variable => {
+                let type = Object.keys(variable)[0]
+                let value = variable[type]['value']
+                // add the variable to the page
+                document.body.innerHTML += `<div>${type}: ${value}</div>`
+            })
+        }
+        fetchData()
+    </script>
+</body>
+</html>

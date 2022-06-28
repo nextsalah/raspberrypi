@@ -21,7 +21,7 @@ def index():
 @main_routes.route( '/screen', defaults={'path': ''} )
 @main_routes.route( '/screen/<path:path>' )
 def main_screen( path ):
-    debug_path = '/home/ismail424/nextsalah/raspberrypi/venv/test'
+    debug_path = '/home/ismail424/nextsalah/raspberrypi/src/themes/classic'
     if path != "" and os.path.exists( debug_path + '/' + path ):
         return send_from_directory( debug_path , path )
     else:

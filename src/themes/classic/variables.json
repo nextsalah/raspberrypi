@@ -1,0 +1,37 @@
+[
+  {
+    "text": {
+      "key": "test_text",
+      "default": "This is a test",
+      "value": "This is a test",
+      "requirements": {
+        "nullable": true,
+        "min_length": 0,
+        "max_length": 10
+      }
+    }
+  },
+  {
+    "number": {
+      "key": "test_number",
+      "default": 100,
+      "value": 100,
+      "requirements": {
+        "nullable": true,
+        "min_value": 0,
+        "max_value": 100
+      }
+    }
+  },
+  {
+    "file_img": {
+      "key": "test_img",
+      "default": "./Image_test.png",
+      "value": "./Image_test.png",
+      "requirements": {
+        "nullable": true,
+        "file_extensions": ["png"]
+      }
+    }
+  }
+]
